@@ -24,7 +24,7 @@ exports.googleLogin = async (req, res) => {
     const { email, name, sub: googleId } = ticket.getPayload();
 
     // checking user exits or not if not then create one
-    const user = await User.findOne({ email });
+    let user = await User.findOne({ email });
     if (!user) {
       user = new User({ email, name, googleId });
       await user.save();
